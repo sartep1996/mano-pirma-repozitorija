@@ -1,0 +1,53 @@
+
+from datetime import datetime
+from zoneinfo import ZoneInfo
+from zoneinfo import available_timezones
+
+
+
+hours = int(input("Iveskite valandas tartp 00 ir 23: "))
+minutes = int(input("Iveskite munutes tarp 00 ir 59: "))
+
+# timeH = str(hours).zfill(2)
+# timeM = str(minutes).zfill(2)
+
+# time = timeH + ":" + timeM
+
+time = ((str(hours).zfill(2) + ":" + str(minutes).zfill(2)))
+
+
+print("Prašau pasirinkti laiko zoną iš pateiktų žemiau: ")
+
+all_timezones = available_timezones()
+for timezone in all_timezones:
+    print(timezone)
+
+zoneinfo = print("Prašau pasirinkti laiko zoną iš kuriai norite pritaikyti šį laiką: ")
+print("Jūsų laikas: ", time)
+laiko_zona = input()
+
+while True:
+    for zona in available_timezones():
+        if zona == laiko_zona:
+            break
+        laiko_zona = zona
+    
+    choice_timezone = int(input("Pasirinkite savo laiko zona: \n"
+                    "1- SIDNĖJUS \n"
+                    "2- DUBAJUS \n"
+                    "3- VILNIUS \n"
+                    "4- LONDONAS \n"
+                    "5- NIUJORKAS \n"
+                    "6- LOS ANDŽELAS \n"))
+    
+    if choice_timezone == 1:
+        
+
+
+
+all_timezones = available_timezones()
+
+for timezone in all_timezones:
+    print(timezone)
+
+
