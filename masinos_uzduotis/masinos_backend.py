@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('automobiliai.db')
+conn = sqlite3.connect('masinos_uzduotis/automobiliai.db')
 c = conn.cursor()
 
 query = """
