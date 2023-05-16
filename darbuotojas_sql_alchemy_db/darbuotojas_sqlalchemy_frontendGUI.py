@@ -11,11 +11,17 @@ session = Session()
 
 
 class DarbuotojasGUI():
-    
-    def __init__(self):
+
+    def gauti_duomenis(self):
         self.darbuotojas_sarasas = session.query(Darbuotojas).all()
         duomenys = [[item.id, item.vardas, item.pavarde, item.atlyginimas, item.dirba_nuo]
             for item in self.darbuotojas_sarasas ]
+        return duomenys
+        
+        
+    
+    def __init__(self):
+        duomenys = self.gauti_duomenis()
         headers = ['ID', 'Vardas', "Pavardė", 'Atlyginimas', "Dirba nuo"]
         self.table = sg.Table(values=duomenys, headings=headers, auto_size_columns=True, key="-TABLE-")
         self.layout = [
@@ -30,18 +36,24 @@ class DarbuotojasGUI():
                 break
             elif event == 'Pridėti Darbuotoją':
                 darbuotojas = self.prideti_darbuotoja()
+                if isinstance (darbuotojas, Darbuotojas):
+                    self.table.update(values=self.gauti_duomenis())
             elif event == 'Redaguoti Darbuotoją':
                 selected_rows = values["-TABLE-"]
                 if selected_rows:
                     selected_row = selected_rows[0]
                     selected_darbuotojas = self.darbuotojas_sarasas[selected_row]
                     self.redaguoti_darbuotoja(selected_darbuotojas)
+                    if isinstance (selected_darbuotojas, Darbuotojas):
+                        self.table.update(values=self.gauti_duomenis())
             elif event == 'Ištrinti Darbuotoją':
                 selected_rows = values["-TABLE-"]
                 if selected_rows:
                     selected_row = selected_rows[0]
                     selected_darbuotojas = self.darbuotojas_sarasas[selected_row]
                     self.istrinti_darbuotoja(selected_darbuotojas)
+                    if isinstance (selected_darbuotojas, Darbuotojas):
+                        self.table.update(values=self.gauti_duomenis())
 
            
         self.window.close()
